@@ -1,0 +1,7 @@
+// this is a comment
+dir.set("c:/user/files/example/)
+loop(files):
+    inflow(txt) intake = file(file)
+    print(intake)
+    intake.addtext("hello world")
+    intake.outflow("final*")
