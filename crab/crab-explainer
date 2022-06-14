@@ -1,5 +1,3 @@
-#crab
-
 crab is a low level programming language.
 
 a main .crab file will call on .crabscript files in the sequence they are called.
