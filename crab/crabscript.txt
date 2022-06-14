@@ -1,0 +1,35 @@
+script test < Args[] {--gpu : arg availiable :}, crun[] {rtest}, cend[] {close} > {
+    ini [
+        svars[
+            int i : 0
+            int x : 1
+            int y : 2
+    ] ,
+    cdat[
+        branch[text] : {string > string ...}
+    ],
+    access[
+        sys.audio[],
+        sys.display[],
+        sys.graphic[],
+        sys.time[]
+    ]
+    ]
+    test.main(args[], crun[], cend[], svars[], cdat[], access[], em[test.error]) {
+        cns.out.log("Hello world")
+        sys.audio[sound{R,L}, mix? Override, volume(sysdefault):100].play(song.mp3, sysap)
+        sys.display[screen{main}, max? True, res(sysdefault)].show(video.mp4, sysvp)
+    } 
+    test.error(args[], crun[], cend[], svars[], cdat[], access[], main[test.main]) {
+        cns.log.report(cnslog.dump(from test.main(start) to test.main(end)) as sysfile("errorlog", type: txt))
+    }
+    test.onquit(args[], crun[], cend[], svars[], cdat[], access[]) {
+        cns.out.log(args[], svars[], cdat[], access[], log[])
+        cns.out.log(dump: cns.get.logs(from test.main(start) to test.main(end)))
+        test.management[quit, all]
+    }
+    fileaccess{
+        svars(i,x,y)
+    }
+}
+
